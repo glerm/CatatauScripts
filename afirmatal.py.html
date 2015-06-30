@@ -1,0 +1,60 @@
+<html><head>
+<title>afirmatal.py</title>
+<meta name="Generator" content="htmlizer/[twisted, version 13.0.0]" />
+<link rel="alternate" href="afirmatal.py" type="text/x-python" />
+
+</head>
+<body>
+<pre><span class="py-src-comment">#!/usr/bin/env python</span>
+<span class="py-src-comment"># -*- coding: utf-8 -*-</span>
+<span class="py-src-keyword">import</span> <span class="py-src-variable">re</span>
+<span class="py-src-keyword">import</span> <span class="py-src-variable">codecs</span>
+<span class="py-src-keyword">import</span> <span class="py-src-variable">nltk</span>
+<span class="py-src-keyword">from</span> <span class="py-src-variable">nltk</span>.<span class="py-src-variable">corpus</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">stopwords</span>
+<span class="py-src-keyword">from</span> <span class="py-src-variable">pyuca</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">Collator</span>
+<span class="py-src-variable">c</span> = <span class="py-src-variable">Collator</span>(<span class="py-src-string">"corpustxt/allkeys.txt"</span>)
+<span class="py-src-variable">arq</span>=<span class="py-src-string">"corpustxt/catatau_semlinebreaks.txt"</span>
+
+
+<span class="py-src-variable">fileObj</span> = <span class="py-src-variable">codecs</span>.<span class="py-src-variable">open</span>( <span class="py-src-variable">arq</span>, <span class="py-src-string">"r"</span>, <span class="py-src-string">"utf-8"</span> )
+<span class="py-src-variable">catatau</span> = <span class="py-src-variable">fileObj</span>.<span class="py-src-variable">read</span>() <span class="py-src-comment"># Returns a Unicode string from the UTF-8 bytes in the file</span>
+
+<span class="py-src-comment"># separa em linhas</span>
+<span class="py-src-variable">stok</span> = <span class="py-src-variable">nltk</span>.<span class="py-src-variable">data</span>.<span class="py-src-variable">load</span>(<span class="py-src-string">'tokenizers/punkt/portuguese.pickle'</span>)
+<span class="py-src-variable">catalinhas</span>=<span class="py-src-variable">stok</span>.<span class="py-src-variable">tokenize</span>(<span class="py-src-variable">catatau</span>) 
+
+
+
+<span class="py-src-comment"># filtra repetições</span>
+<span class="py-src-variable">a</span> = <span class="py-src-variable">set</span>(<span class="py-src-variable">catalinhas</span>)
+<span class="py-src-variable">frases</span>=<span class="py-src-variable">list</span>(<span class="py-src-variable">a</span>)
+
+<span class="py-src-comment"># usando o padrao de ordenamento do collate pyuca para considerar acentos</span>
+<span class="py-src-variable">frases</span>=<span class="py-src-variable">sorted</span>(<span class="py-src-variable">frases</span>, <span class="py-src-variable">key</span>=<span class="py-src-variable">c</span>.<span class="py-src-variable">sort_key</span>)
+
+<span class="py-src-comment">#frases.reverse()</span>
+
+
+<span class="py-src-comment"># termina em interrogação.</span>
+<span class="py-src-variable">txt</span>=<span class="py-src-string">""</span>
+<span class="py-src-variable">conta</span>=<span class="py-src-number">0</span>
+<span class="py-src-keyword">for</span> <span class="py-src-variable">c</span> <span class="py-src-keyword">in</span> <span class="py-src-variable">frases</span>:
+	<span class="py-src-variable">c</span>.<span class="py-src-variable">replace</span>(<span class="py-src-string">' '</span>,<span class="py-src-string">'\n'</span>)
+ <span class="py-src-variable">m</span> = <span class="py-src-variable">re</span>.<span class="py-src-variable">match</span>(<span class="py-src-string">"^.*\.$"</span>, <span class="py-src-variable">c</span>, <span class="py-src-variable">re</span>.<span class="py-src-variable">MULTILINE</span>)
+ <span class="py-src-keyword">if</span> <span class="py-src-variable">m</span>:
+  <span class="py-src-comment">#print(c)</span>
+		<span class="py-src-variable">txt</span>=<span class="py-src-variable">txt</span>+<span class="py-src-variable">c</span>+<span class="py-src-string">" \n\n"</span>
+  <span class="py-src-variable">conta</span>=<span class="py-src-variable">conta</span>+<span class="py-src-number">1</span>
+<span class="py-src-variable">txt</span>=<span class="py-src-variable">txt</span>+<span class="py-src-string">"\n total de linhas= "</span>+<span class="py-src-variable">str</span>(<span class="py-src-variable">conta</span>)
+ 
+<span class="py-src-variable">frases</span>.<span class="py-src-variable">reverse</span>()
+
+<span class="py-src-keyword">print</span> <span class="py-src-variable">frases</span>
+
+
+<span class="py-src-comment">############# grava arquivo</span>
+<span class="py-src-variable">file</span> = <span class="py-src-variable">codecs</span>.<span class="py-src-variable">open</span>(<span class="py-src-string">"Afirmatau.txt"</span>, <span class="py-src-string">"w"</span>, <span class="py-src-string">"utf-8"</span>)
+<span class="py-src-variable">file</span>.<span class="py-src-variable">write</span>(<span class="py-src-variable">txt</span>)
+<span class="py-src-variable">file</span>.<span class="py-src-variable">close</span>()
+</pre>
+</body>

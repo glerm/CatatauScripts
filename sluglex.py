@@ -9,7 +9,7 @@ c = Collator("corpustxt/allkeys.txt")
 
 
 # arquivo analisado (no mesmo diretorio)
-arq="corpustxt/aquilo.txt"
+arq="corpustxt/catatau.txt"
 fileObj = codecs.open( arq, "r", "utf-8" )
 mikrofesto = fileObj.read() 
 
@@ -40,14 +40,34 @@ glossario=sorted(glossario, key=c.sort_key)
 # ordenado pelo reverso pra ficar de a até z
 glossario.reverse()
 
-# formatando separado por espaços e vírgulas
-a=""
-for w in glossario:
-	a=w+", "+a
+print glossario
 
-print a
+### organiza slugs
+import re
+import translitcodec
+
+_punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
+
+
+def slugify(text, delim=u'-'):
+#Generates an ASCII-only slug.
+	result = []
+	for word in _punct_re.split(text.lower()):
+		word = word.encode('translit/long')
+		if word:
+			result.append(word)
+	return unicode(delim.join(result))
+
+
+slugs=[]
+
+for l in glossario:
+	slugs.append(slugify(l))
+	
+print slugs
+
 
 ############# grava arquivo
-file = codecs.open("AquiloLexico.txt", "w", "utf-8")
-file.write(a)
-file.close()
+#file = codecs.open("SlugLexico.txt", "w", "utf-8")
+#file.write(a)
+#file.close()

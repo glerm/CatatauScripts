@@ -6,7 +6,7 @@ import nltk
 from nltk.corpus import stopwords
 from pyuca import Collator
 c = Collator("corpustxt/allkeys.txt")
-arq="corpustxt/catatau_semlinebreaks.txt"
+arq="corpustxt/afirma.txt"
 
 
 fileObj = codecs.open( arq, "r", "utf-8" )
@@ -33,7 +33,7 @@ txt=""
 conta=0
 for c in frases:
 	c.replace(' ','\n')
-	m = re.match("^.*\?$", c, re.MULTILINE)
+	m = re.match("^.*\.$", c, re.MULTILINE)
 	if m:
 		#print(c)
 		txt=txt+c+" \n\n"
@@ -46,6 +46,6 @@ print frases
 
 
 ############# grava arquivo
-file = codecs.open("Perguntau.txt", "w", "utf-8")
+file = codecs.open("Afirmatau.txt", "w", "utf-8")
 file.write(txt)
 file.close()

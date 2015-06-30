@@ -1,0 +1,13 @@
+Criptodramaurgia
+
+A composição do recorte texual para a dramaturgia de "CATATAU: a justa razão aqui delira" contou com um experimento de bases na linguística computacional para encontrar novas leituras que pudessem revelar contextos ocultos e estimular jogos experimentais em ressonância com o espírito inventor que tempera o estilo de sua prosa.
+
+Utilizando-se de técnicas de "processamento de linguagem natural" utilizada hoje por tradutores automatizados, corretores ortográficos e simuladores de estilo da escrita, produzimos algumas recombinações e índices derivados do texto orginal que serviram como base para a construção de bordões, ordenamentos e transições das falas. Uma inspiração para a usina criativa do que batizamos CRIPTODRAMATURGIA: procedimento dramatúrgico inspirado na arte de estudar, cifrar e decifrar mensagens "criptografadas" - ou seja - mensagens ocultas em anagramas, trocadilhos ou formações truncadas pelo ordemento de frases e períodos do texto original.
+
+Como material base compilamos 4 livros derivados neste processo: o "AlfaTaTal" - índice do léxico completo do Catatau em ordem alfabética, e três livros que contém as frases curtas de exclamações, perguntas e afirmações do Catatau em ordem alfabética ("ExclamaTal", "PerguntaTal" e "AfirmaTal" ).
+
+Outros procedimentos foram derivados do isolamento de contextos por palavras chave, como na uilização de todas frases e vizinhanças com as palavras Occam ("Canône de Occam"), Tudo (transformada no samba "Tudo e Tal") e as frases iniciadas com a afirmação do Eu (cena dos espelhos da "Eulália").
+
+Estes jogos linguísticos deixaram ainda um caminho aberto para novas recombinações da obra e a construção de processos e novos textos derivados destas técnicas de CRIPTODRAMATURGIA.
+
+

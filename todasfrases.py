@@ -6,7 +6,7 @@ import nltk
 from nltk.corpus import stopwords
 from pyuca import Collator
 c = Collator("corpustxt/allkeys.txt")
-arq="corpustxt/catatau_semlinebreaks.txt"
+arq="corpustxt/todasfrases.txt"
 
 
 fileObj = codecs.open( arq, "r", "utf-8" )
@@ -32,12 +32,8 @@ frases=sorted(frases, key=c.sort_key)
 txt=""
 conta=0
 for c in frases:
-	c.replace(' ','\n')
-	m = re.match("^.*\?$", c, re.MULTILINE)
-	if m:
-		#print(c)
-		txt=txt+c+" \n\n"
-		conta=conta+1
+	txt=txt+c+" \n\n"
+	conta=conta+1
 txt=txt+"\n total de linhas= "+str(conta)
 	
 frases.reverse()
@@ -46,6 +42,6 @@ print frases
 
 
 ############# grava arquivo
-file = codecs.open("Perguntau.txt", "w", "utf-8")
+file = codecs.open("TODASFRASES.txt", "w", "utf-8")
 file.write(txt)
 file.close()

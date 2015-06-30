@@ -10,7 +10,7 @@ import codecs
 import nltk
 from nltk.corpus import stopwords
 from pyuca import Collator
-c = Collator("allkeys.txt")
+c = Collator("corpustxt/allkeys.txt")
 
 
 
