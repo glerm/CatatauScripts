@@ -11,11 +11,7 @@ import nltk
 from nltk.corpus import stopwords
 from pyuca import Collator
 c = Collator("corpustxt/allkeys.txt")
-
-
-
-
-arq="corpustxt/catatau.txt"
+arq="corpustxt/catatau_semlinebreaks.txt"
 
 
 fileObj = codecs.open( arq, "r", "utf-8" )
