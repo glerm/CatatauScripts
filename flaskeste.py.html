@@ -1,0 +1,61 @@
+<html><head>
+<title>flaskeste.py</title>
+<meta name="Generator" content="htmlizer/[twisted, version 13.0.0]" />
+<link rel="alternate" href="flaskeste.py" type="text/x-python" />
+
+</head>
+<body>
+<pre><span class="py-src-comment">#!/usr/bin/env python</span>
+<span class="py-src-comment"># -*- coding: utf-8 -*-</span>
+<span class="py-src-keyword">from</span> <span class="py-src-variable">flask</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">Flask</span>
+<span class="py-src-keyword">import</span> <span class="py-src-variable">sys</span>
+<span class="py-src-keyword">import</span> <span class="py-src-variable">re</span>
+<span class="py-src-keyword">import</span> <span class="py-src-variable">codecs</span>
+<span class="py-src-keyword">import</span> <span class="py-src-variable">nltk</span>
+<span class="py-src-keyword">from</span> <span class="py-src-variable">nltk</span>.<span class="py-src-variable">corpus</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">stopwords</span>
+<span class="py-src-keyword">from</span> <span class="py-src-variable">pyuca</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">Collator</span>
+<span class="py-src-variable">c</span> = <span class="py-src-variable">Collator</span>(<span class="py-src-string">"corpustxt/allkeys.txt"</span>)
+<span class="py-src-variable">arq</span>=<span class="py-src-string">"corpustxt/todasfrases.txt"</span>
+
+
+<span class="py-src-variable">fileObj</span> = <span class="py-src-variable">codecs</span>.<span class="py-src-variable">open</span>( <span class="py-src-variable">arq</span>, <span class="py-src-string">"r"</span>, <span class="py-src-string">"utf-8"</span> )
+<span class="py-src-variable">catatau</span> = <span class="py-src-variable">fileObj</span>.<span class="py-src-variable">read</span>() <span class="py-src-comment"># Returns a Unicode string from the UTF-8 bytes in the file</span>
+
+<span class="py-src-comment"># separa em linhas</span>
+<span class="py-src-variable">stok</span> = <span class="py-src-variable">nltk</span>.<span class="py-src-variable">data</span>.<span class="py-src-variable">load</span>(<span class="py-src-string">'tokenizers/punkt/portuguese.pickle'</span>)
+<span class="py-src-variable">catalinhas</span>=<span class="py-src-variable">stok</span>.<span class="py-src-variable">tokenize</span>(<span class="py-src-variable">catatau</span>) 
+
+
+
+<span class="py-src-comment"># filtra repetições</span>
+<span class="py-src-variable">a</span> = <span class="py-src-variable">set</span>(<span class="py-src-variable">catalinhas</span>)
+<span class="py-src-variable">frases</span>=<span class="py-src-variable">list</span>(<span class="py-src-variable">a</span>)
+
+<span class="py-src-comment"># usando o padrao de ordenamento do collate pyuca para considerar acentos</span>
+<span class="py-src-variable">frases</span>=<span class="py-src-variable">sorted</span>(<span class="py-src-variable">frases</span>, <span class="py-src-variable">key</span>=<span class="py-src-variable">c</span>.<span class="py-src-variable">sort_key</span>)
+
+<span class="py-src-variable">frases</span>.<span class="py-src-variable">reverse</span>()
+
+
+<span class="py-src-variable">app</span> = <span class="py-src-variable">Flask</span>(<span class="py-src-variable">__name__</span>)
+
+@<span class="py-src-variable">app</span>.<span class="py-src-variable">route</span>(<span class="py-src-string">"/"</span>)
+<span class="py-src-keyword">def</span> <span class="py-src-identifier">hello</span>():
+	<span class="py-src-keyword">return</span> <span class="py-src-string">"Hello World!"</span>
+
+@<span class="py-src-variable">app</span>.<span class="py-src-variable">route</span>(<span class="py-src-string">'/&lt;var1&gt;'</span>)
+<span class="py-src-keyword">def</span> <span class="py-src-identifier">busca</span>(<span class="py-src-parameter">var1</span>):
+	<span class="py-src-variable">b</span> = <span class="py-src-variable">re</span>.<span class="py-src-variable">compile</span>(<span class="py-src-string">"\\b"</span>+<span class="py-src-variable">var1</span>+<span class="py-src-string">"\\b"</span>, <span class="py-src-variable">re</span>.<span class="py-src-variable">IGNORECASE</span>)
+ <span class="py-src-variable">txt</span>=<span class="py-src-string">''</span>
+ <span class="py-src-keyword">for</span> <span class="py-src-variable">f</span> <span class="py-src-keyword">in</span> <span class="py-src-variable">frases</span>:
+		<span class="py-src-variable">achou</span> = <span class="py-src-variable">re</span>.<span class="py-src-variable">search</span>(<span class="py-src-variable">b</span>, <span class="py-src-variable">f</span>)
+  <span class="py-src-keyword">if</span> <span class="py-src-variable">achou</span>:
+			<span class="py-src-variable">txt</span>=<span class="py-src-string">'&lt;p&gt;'</span>+<span class="py-src-variable">f</span>+<span class="py-src-string">'&lt;/h3&gt;&lt;/p&gt;'</span>+<span class="py-src-variable">txt</span>
+ <span class="py-src-keyword">return</span> <span class="py-src-variable">txt</span>
+
+
+
+<span class="py-src-keyword">if</span> <span class="py-src-variable">__name__</span> == <span class="py-src-string">"__main__"</span>:
+	<span class="py-src-variable">app</span>.<span class="py-src-variable">run</span>()
+</pre>
+</body>

@@ -46,20 +46,20 @@ glossario.reverse()
 # formatando separado por espaços e vírgulas
 a=""
 
+for letra in ascii_lowercase:
+	for w in glossario:
+		if bool(re.match('['+letra+'|'+letra.upper()+']',w)):
+			a="<a href=\"http://localhost:5000/"+w+"\">"+w+"</a> "+a
+
+	c="<html><head><title>ALFA:Ta:TAL</title><style>a:link{color:#000000; font-family: \"courier\";line-height: 20px; font-size: 13px; text-decoration: none} a:visited{#BBBBBB; font-family: \"courier\"; line-height: 20px; font-size: 13px; text-decoration: none} a:hover{background-color:yellow;font-size: 20px;font-family: \"courier\"}</style><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><body><a href=\"\"><img src=\"seta_esquerda.png\" height=\"40\">Volta</a></br></br>"
+	t="</body></html>"
+
+	a=c+a+t
+	print "Gravando letra: "+letra+"\n"
+	############# grava arquivo
+	file = codecs.open('indice/'+letra+'_lexico.html', 'w', 'utf-8')
+	file.write(a)
+	file.close()
+	a=""
 
 
-for w in glossario:
-	if bool(re.match('[A|a]',w)):
-		a="<a href=\"http://localhost:5000/"+w+"\">"+w+"</a> "+a
-
-c="<html><head><title>ALFA:Ta:TAL</title><style>a:link{color:#000000; font-family: \"courier\";line-height: 25px; font-size: 15px; text-decoration: none} a:visited{#BBBBBB; font-family: \"courier\"; line-height: 25px; font-size: 15px; text-decoration: none} a:hover{background-color:yellow;font-size: 30px;font-family: \"courier\"}</style><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><body><a href=\"\">\<ALFA\<Volta</a></br></br>"
-t="</body></html>"
-
-a=c+a+t
-
-print a
-
-############# grava arquivo
-file = codecs.open("indice/A_lexico.html", "w", "utf-8")
-file.write(a)
-file.close()
