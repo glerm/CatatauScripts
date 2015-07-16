@@ -48,8 +48,8 @@ def busca(var1):
 	for f in frases:
 		achou = re.search(b, f)
 		if achou:
-			txt='<p>'+f+'</h3></p>'+txt
-	return txt
+			txt='<p>'+f+'</p>'+txt
+	return '<html><title>ALFA:Ta:TAL</title><style>p{color:#335 font-family: \"courier\";line-height: 50px; font-size: 50px; text-decoration: none}</style><body><a href=\"http://localhost:5000\">Volta</a></br>'+txt+'</body></html>'
 
 
 
