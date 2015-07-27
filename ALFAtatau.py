@@ -29,7 +29,7 @@ tokens = nltk.word_tokenize(mikrofesto)
 catacorpus=nltk.Text(nltk.word_tokenize(mikrofesto))
 
 
-#convertendo para vetor para filtrar repitições
+#convertendo para vetor para filtrar repetições
 a = set(tokens)
 # retornando para tipo lista
 glossario=list(a)

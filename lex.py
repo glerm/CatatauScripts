@@ -57,6 +57,6 @@ print a
 #print mikrofesto
 
 ############# grava arquivo
-file = codecs.open("AquiloLexico.txt", "w", "utf-8")
+file = codecs.open("NovoLexico.txt", "w", "utf-8")
 file.write(a)
 file.close()
